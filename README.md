@@ -28,6 +28,35 @@ or
 ```
 
 
+
+
+
+Version 2 can record multiple groups in the text.
+Example:
+```
+{
+	"hex_old": ["AA AA AA", "00 00 00"],
+	"hex_new": ["FF FF FF", "11 11 11"]
+}
+```
+
+`AA AA AA` will change to `FF FF FF` and `00 00 00` will change to `11 11 11`.
+
+But keep in mind: `that the number of groups should be the same`:
+
+```
+{
+	"hex_old": ["AA AA AA", "00 00 00", "99 A5 F1"],
+	"hex_new": ["FF FF FF", "11 11 11"]
+}
+```
+
+Bytes `99 A5 F1` will be ignored
+
+
+
+
+
 NOTE:
 
 For `version 1`, there should be a STRING in the config, not an array:
