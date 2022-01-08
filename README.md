@@ -32,6 +32,7 @@ or
 
 
 Version 2 can record multiple groups in the text.
+
 Example:
 ```
 {
@@ -42,7 +43,7 @@ Example:
 
 `AA AA AA` will change to `FF FF FF` and `00 00 00` will change to `11 11 11`.
 
-But keep in mind: `that the number of groups should be the same`:
+But keep in mind: `the number of groups must be the same`:
 
 ```
 {
