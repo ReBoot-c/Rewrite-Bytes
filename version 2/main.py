@@ -18,6 +18,13 @@ if args.config and args.file:
 
     except FileNotFoundError:
         print("Config not found")
+        exit(0)
+    except PermissionError:
+        print("Permission Error")
+        exit(0)
+    except Exception as ex:
+        print("Unknow error: \n {}".format(ex))
+        exit(0)
 else:
     print("Write --help for help")
     exit()
@@ -25,33 +32,29 @@ else:
 file_name = path.abspath(args.file)
 
 
-# try:
-with open(file_name, "rb") as file:
-    data = file.read()
-hex_old = [bytes.fromhex(i) for i in settings["hex_old"]]
-hex_new = [bytes.fromhex(i) for i in settings["hex_new"]]
-count = 0
-for i in hex_old:
-    if i in data:
-        count += 1 
+try:
+    with open(file_name, "rb") as file:
+        data = file.read()
+    hex_old = [bytes.fromhex(i) for i in settings["hex_old"]]
+    hex_new = [bytes.fromhex(i) for i in settings["hex_new"]]
+    count = 0
+    for i in hex_old:
+        if i in data:
+            count += 1 
 
-if count > 0:
-    with open(file_name, "wb") as file_edit:
-        
+    if count > 0:
+        with open(file_name, "wb") as file_edit:
+            for byte_replace in zip(hex_old, hex_new):
+                data = data.replace(*byte_replace)
+            file_edit.write(data)
+            print("Rewrite: {}".format(count))
+    else:
+        print("Bytes not found")
 
-        for j in zip(hex_old, hex_new):
-            data = data.replace(*j)
-        file_edit.write(data)
-        print("Rewrite: {}".format(count))
-else:
-    print("Bytes not found")
-
-# except FileNotFoundError:
-#     print("File not found")
-
-# except PermissionError:
-#     print("Please, close the file")
-
-# except Exception as expection:
-#     print("Unknow error: \n {}".format(expection))
+except FileNotFoundError:
+    print("File not found")
+except PermissionError:
+    print("Permission error")
+except Exception as ex:
+    print("Unknow error: \n {}".format(ex))
 
