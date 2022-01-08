@@ -40,10 +40,12 @@ try:
                 file.seek(offset)
                 hex_new = bytes.fromhex(settings["hex_new"])
                 file.write(hex_new)
-                print("Rewrite")
+                
 
             else:
                 print("Bytes not found")
+                exit(0)
+        print("Rewrite")
 
 except FileNotFoundError:
     print("File not found")
