@@ -16,6 +16,13 @@ if args.config and args.file:
 
     except FileNotFoundError:
         print("Config not found")
+        exit(0)
+    except PermissionError:
+        print("Permission error")
+        exit(0)
+    except Exception as ex:
+        print("Unknow error: \n {}".format(ex))
+        exit(0)
 else:
     print("Write --help for help")
     exit()
@@ -26,7 +33,7 @@ try:
     with open(file_name, "rb+") as file:
         data = file.read()
         hex_old = bytes.fromhex(settings["hex_old"])
-        offset = data.find(hex_old)+settings["offset"]
+        offset = data.find(hex_old)
 
         for i in range(data.count(hex_old)):
             if offset != -1:
@@ -40,6 +47,7 @@ try:
 
 except FileNotFoundError:
     print("File not found")
-
 except PermissionError:
-    print("Please, close the file")
+    print("Permission error")
+except Exception as ex:
+    print("Unknow error: \n {}".format(ex))
