@@ -43,7 +43,7 @@ Example:
 
 `AA AA AA` will change to `FF FF FF` and `00 00 00` will change to `11 11 11`.
 
-But keep in mind: `the number of groups must be the same`:
+But keep in mind: `The number of groups should not be different`:
 
 ```
 {
