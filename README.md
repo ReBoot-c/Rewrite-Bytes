@@ -1,4 +1,11 @@
-Usage:
+# Rewrite bytes in files
+**status:**
+
+- version 1 - alpha version, one-time replacement algorithm
+
+- version 2 - development version, new replacement algorithm
+
+**Usage**:
 
 `python3 main.py -c config.json -f file`
 
@@ -58,7 +65,7 @@ Bytes `99 A5 F1` will be ignored
 
 
 
-NOTE:
+**NOTE**:
 
 For `version 1`, there should be a STRING in the config, not an array:
 ```
@@ -69,7 +76,7 @@ For `version 1`, there should be a STRING in the config, not an array:
 ```
 
 
-NOTE 2:
+**NOTE 2**:
 Version 1 overwrites a group of bytes only once!
 Example:
 replace `AA` with `FF` in the text:
@@ -77,7 +84,7 @@ replace `AA` with `FF` in the text:
 When version 1 starts, the text will change to `FF 00 AA 00 AA`.
 Version 2 replaces all byte groups! And from `AA 00 AA 00 AA` will change to `FF 00 FF 00 FF`.
 
-NOTE 3:
+**NOTE 3**:
 when replacing bytes (for example, if we replace `AA` with `FF` in the file, then when replacing it back (`AA` to `FF`), extra bytes (which were in the file before the replacement) may be replaced
 Example:
 replaced `AA` with `FF` in the text ```AA AA AA FF``` and the text will change to ```FF FF FF FF```. If we try to change bytes from `FF` to `AA` after replacement, we will change the text to ```AA AA AA AA``` (which was not in the original file and the file may stop not working) 
